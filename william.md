@@ -1,4 +1,5 @@
 # William's notes
-## 1
-  * The Philosophy:
-  * 
+
+## Contact Info
+  * Email: wury@tw.ibm.com
+  * Mobile: 0926-212-558
