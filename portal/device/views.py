@@ -78,18 +78,16 @@ def list_monthly_virtual_server():
                       mask='location',
                     ));
     item_dict = json.loads(ret);
-    return item_dict;  
+    return item_dict;
 
 def api_doc_md():
     with open('device/device_list.md', 'r') as content_file:
         ret = content_file.read();
-    print (ret);
     markdown2.markdown(ret)
     return markdown2.markdown(ret, extras=['tables']);
 
 def get_device_info_by_id_baremetal(device_id):    
     requestURL = 'https://'+settings.SL_USERNAME+':'+settings.SL_APIKEY+'@api.softlayer.com/rest/v3/'+ 'SoftLayer_Hardware' +'/'+ device_id + '/' + 'getObject' +'.json'+'?objectMask=topLevelLocation';
-    print (requestURL);
     s = requests.Session();
     response = s.get(requestURL);
     item_dict = json.loads(response.text);
@@ -128,7 +126,29 @@ def get_motherboard(device_id):
     s = requests.Session();
     response = s.get(requestURL);
     item_dict = json.loads(response.text);
-    return item_dict;    
+    return item_dict;
+
+def get_power_supply(device_id):
+    requestURL = 'https://'+settings.SL_USERNAME+':'+settings.SL_APIKEY+'@api.softlayer.com/rest/v3/'+ 'SoftLayer_Hardware' +'/'+ device_id + '/' + 'getPowerSupply' +'.json';
+    s = requests.Session();
+    response = s.get(requestURL);
+    item_dict = json.loads(response.text);
+    return item_dict;
+
+def get_drive_controller(device_id):
+    requestURL = 'https://'+settings.SL_USERNAME+':'+settings.SL_APIKEY+'@api.softlayer.com/rest/v3/'+ 'SoftLayer_Hardware' +'/'+ device_id + '/' + 'getDriveControllers' +'.json';
+    s = requests.Session();
+    response = s.get(requestURL);
+    item_dict = json.loads(response.text);
+    return item_dict;
+
+def get_baremetal_credential(device_id):
+    requestURL = 'https://'+settings.SL_USERNAME+':'+settings.SL_APIKEY+'@api.softlayer.com/rest/v3/'+ 'SoftLayer_Hardware' +'/'+ device_id + '/' + 'getRemoteManagementAccounts' +'.json';
+    s = requests.Session();
+    response = s.get(requestURL);
+    item_dict = json.loads(response.text);
+    return item_dict;
+
 # ------------- Utility Functions Ends----------- #
 
 
@@ -160,6 +180,10 @@ def device_detail_baremetal(request, device_id):
                    'processor': get_processors(device_id),
                    'motherboard': get_motherboard(device_id), 
                    'device_info': get_device_info_by_id_baremetal(device_id), 
+                   'powersupply': get_power_supply(device_id),
+                   'drivecontroller': get_drive_controller(device_id),
+                   'baremetal_username': get_baremetal_credential(device_id),
+                   'baremetal_password': get_baremetal_credential(device_id),
                   },
                 )
 

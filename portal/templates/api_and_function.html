@@ -98,24 +98,23 @@
 				<tr><th>RAM</th> <td>{{ram.0.hardwareComponentModel.longDescription}}</td></tr>
 				<tr><th>Processor</th> <td>{{processor.0.hardwareComponentModel.longDescription}}</td></tr>
 				<tr><th>Mother Board</th> <td>{{motherboard.hardwareComponentModel.longDescription}}</td></tr>
-				<tr><th>Drive Control</th> <td></td></tr>
-				<tr><th>Security Device</th> <td></td></tr>
-				<tr><th>Backplane</th> <td></td></tr>
-				<tr><th>Power Supply</th> <td></td></tr>
-				<tr><th>Remote Management card</th> <td></td></tr>
+				<tr><th>Power Supply</th> <td>{{powersupply.0.hardwareComponentModel.longDescription}}</td></tr>
+				<tr><th>Drive Control</th> <td>{{drivecontroller.0.hardwareComponentModel.longDescription}}</td></tr>
 		</tbody>
 		</table>
 
 		<table class = 't1'>
-		<thead><tr><th><h3>Network</h3></th><th></th></tr></thead>
+		<thead><tr><th><h3>Network</h3></th><th></th><th></th><th></th></tr></thead>
+		<thead><tr><th></th><th>Public</th><th>Private</th><th>Management</th></tr></thead>
+		<thead><tr><th></th><th>eth1</th><th>eth0</th><th>mgmt0</th></tr></thead>
 		<tbody>
-				<tr><th>Status</th> <td>{{device_info.hardwareStatus.status}}</td></tr>
-				<tr><th>Location</th> <td></td></tr>
-				<tr><th>Start Date</th> <td>{{device_info.provisionDate}}</td></tr>
-				<tr><th>Reloaded</th> <td></td></tr>
-				<tr><th>Serial Number</th> <td>{{device_info.serialNumber}}</td></tr>
-				<tr><th>MFR Serial Number</th> <td></td></tr>
-				<tr><th>Network Bandwidth Usage</th> <td></td></tr>
+				<tr><th>Status</th> <td>{{device_info.hardwareStatus.status}}</td><td></td><td></td></tr>
+				<tr><th>Location</th> <td></td><td></td><td></td></tr>
+				<tr><th>Start Date</th> <td>{{device_info.provisionDate}}</td><td></td><td></td></tr>
+				<tr><th>Reloaded</th> <td></td><td></td><td></td></tr>
+				<tr><th>Serial Number</th> <td>{{device_info.serialNumber}}</td><td></td><td></td></tr>
+				<tr><th>MFR Serial Number</th> <td></td><td></td><td></td></tr>
+				<tr><th>Network Bandwidth Usage</th> <td></td><td></td><td></td></tr>
 		</tbody>
 		</table>
 
@@ -135,8 +134,8 @@
 		<table class = 't1'>
 		<thead><tr><th><h3>Password</h3></th><th></th></tr></thead>
 		<tbody>
-				<tr><th>Username</th> <td></td></tr>
-				<tr><th>Password</th> <td></td></tr>
+				<tr><th>Username</th> <td>{{baremetal_username}}</td></tr>
+				<tr><th>Password</th> <td>{{baremetal_password}}</td></tr>
 		</tbody>
 		</table>
 
