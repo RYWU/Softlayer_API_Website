@@ -1,0 +1,154 @@
+{% load staticfiles %}
+<html>
+<head>
+	<title>Homepage | SoftLayer API Online Demonstration</title>
+	<link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "table.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "ajax.css" %}">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js" ></script>
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" ></script>
+	<script type="text/javascript" src="{% static "json.js" %}" ></script>
+	<script type="text/javascript">//paste this code under head tag or in a seperate js file.
+	// Wait for window load
+	$(window).load(function() {
+		$(".se-pre-con").fadeOut("slow");;
+	});</script>
+</head>
+<body>
+<div class="se-pre-con"></div>	
+<div class="wrapper">
+	<div class="api_area"> <!-- Left-side Area -->
+		<h2>使用到的 API 一覽表</h2>
+		<hr>
+
+		{{api_doc_md | safe}}
+
+	</div class="api_area">
+
+	<div class="function_area"> <!-- Right-side Area -->
+		<h2> 
+			<a href='{% url "home" %}'>Home</a> | 
+			<a href='{% url "device" %}'>Device</a> | 
+			<a href="">Storage</a> | 
+			<a href="">Network</a> | 
+			<a href="">Support</a> | 
+			<a href="">Account</a> |
+		</h2> 
+		<hr>
+
+
+		{% if request.path == '/device/device_list' or '/device' %}
+		<h3> 
+			<a href='{% url "device_list" %}'>Device_list</a> | 
+			<a href="">Auto_scale</a> | 
+		</h3> 
+		{% endif %}
+
+		<hr> 
+		
+		{% if request.path == '/device/device_list/' %}
+		<div class = 'table_area'> <!-- Table to list the devices -->
+			<table class = 't1'>
+			<h3 style='color: white'>Devices List</h3>
+			<p>Viewing {{total_devices_number}} of {{total_devices_number}} Devices</p>
+			<thead>
+			<tr> <th>Device Name</th> <th>Device Type</th> <th>Location</th> <th>Public IP</th> <th>Private IP</th> <th>Start Date</th> </tr></thead>
+			<tbody>
+					{% for item in baremetal %}
+					<tr><th> <a href="/device/device_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a> </th> <td>Bare Metal</td> <td> {{ item.topLevelLocation.longName }} </td> <td>{{ item.primaryIpAddress }}</td> <td>{{ item.primaryBackendIpAddress }}</td> <td> {{item.provisionDate}} </td> </tr>
+					{% endfor %}
+					
+					{% for item in hourlyvirtualserver %}
+					<tr><th><a href="/device/device_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a></th> <td> Virtual Server(Hourly) </td> <td> {{ item.location.id }} </td> <td>{{ item.primaryIpAddress }}</td> <td>{{ item.primaryBackendIpAddress }}</td> <td>{{item.provisionDate}}</td> </tr>
+					{% endfor %}
+
+					{% for item in monthlyvirtualserver %}
+					<tr><th><a href="/device/device_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a></th> <td> Virtual Server(Monthly) </td> <td> {{ item.location.id }} </td> <td>{{ item.primaryIpAddress }}</td> <td>{{ item.primaryBackendIpAddress }}</td> <td>{{ item.provisionDate }}</td> </tr>
+					{% endfor %}
+
+			</tbody>
+			</table>
+		</div>
+		{% endif %}
+
+
+		{% if '/device/device_detail' in request.path %}
+		<h3 style='color: white'>Device Detail</h3>
+		<h3><strong style='color: black'>{{device_info.fullyQualifiedDomainName}}</strong> </h3>
+		<p>Device Type:  {{device_type}}</p>
+		<p>Device Public IP: {{device_info.primaryIpAddress}} </p>
+		<p>Device Private IP: {{device_info.primaryBackendIpAddress}} </p>
+
+		<table class = 't1'>
+		<thead><tr><th><h3>General</h3></th><th></th></tr></thead>
+		<tbody>
+				<tr><th>Status</th> <td>{{device_info.hardwareStatus.status}}</td></tr>
+				<tr><th>Location</th> <td> {{device_info.topLevelLocation.longName}} </td></tr>
+				<tr><th>Start Date</th> <td>{{device_info.provisionDate}}</td></tr>
+				<!-- <tr><th>Reloaded</th> <td></td></tr> -->
+				<tr><th>Serial Number</th> <td>{{device_info.serialNumber}}</td></tr>
+				<tr><th>MFR Serial Number</th> <td>{{device_info.manufacturerSerialNumber}}</td></tr>
+		</tbody>
+		</table>
+
+		<table class = 't1'>
+		<thead><tr><th><h3>System</h3></th><th></th></tr></thead>
+		<tbody>
+				<tr><th>OS</th> <td>{{os.softwareLicense.softwareDescription.longDescription}}</td></tr>
+				<tr><th>RAM</th> <td>{{ram.0.hardwareComponentModel.longDescription}}</td></tr>
+				<tr><th>Processor</th> <td>{{processor.0.hardwareComponentModel.longDescription}}</td></tr>
+				<tr><th>Mother Board</th> <td>{{motherboard.hardwareComponentModel.longDescription}}</td></tr>
+				<tr><th>Drive Control</th> <td></td></tr>
+				<tr><th>Security Device</th> <td></td></tr>
+				<tr><th>Backplane</th> <td></td></tr>
+				<tr><th>Power Supply</th> <td></td></tr>
+				<tr><th>Remote Management card</th> <td></td></tr>
+		</tbody>
+		</table>
+
+		<table class = 't1'>
+		<thead><tr><th><h3>Network</h3></th><th></th></tr></thead>
+		<tbody>
+				<tr><th>Status</th> <td>{{device_info.hardwareStatus.status}}</td></tr>
+				<tr><th>Location</th> <td></td></tr>
+				<tr><th>Start Date</th> <td>{{device_info.provisionDate}}</td></tr>
+				<tr><th>Reloaded</th> <td></td></tr>
+				<tr><th>Serial Number</th> <td>{{device_info.serialNumber}}</td></tr>
+				<tr><th>MFR Serial Number</th> <td></td></tr>
+				<tr><th>Network Bandwidth Usage</th> <td></td></tr>
+		</tbody>
+		</table>
+
+
+		<table class = 't1'>
+		<thead><tr><th><h3>Software</h3></th><th></th></tr></thead>
+		<tbody>
+				<tr><th>Activation Code</th> <td></td></tr>
+				<tr><th>-</th> <td></td></tr>
+				<tr><th>-</th> <td>{{device_info.provisionDate}}</td></tr>
+				<tr><th>-</th> <td></td></tr>
+				<tr><th>-</th> <td>{{device_info.serialNumber}}</td></tr>
+				<tr><th>-</th> <td></td></tr>
+		</tbody>
+		</table>
+
+		<table class = 't1'>
+		<thead><tr><th><h3>Password</h3></th><th></th></tr></thead>
+		<tbody>
+				<tr><th>Username</th> <td></td></tr>
+				<tr><th>Password</th> <td></td></tr>
+		</tbody>
+		</table>
+
+		{% endif %}
+
+<!-- 		<hr><h3>Debug Area</h3>
+		{{debug}}
+ -->
+
+
+		
+	</div class="function_area"> 
+</div class="wrapper">
+</body>
+</html>

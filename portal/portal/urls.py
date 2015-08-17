@@ -16,6 +16,20 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+# import view functions from trips app
+from portal.view import *
+from device.views import *
+# from storage.views import *
+# from network.views import *
+# from support.views import *
+# from account.views import *
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', home, name='home'),
+    url(r'^device/$', device, name='device'),
+    url(r'^device/device_list/$', device_list, name='device_list'),
+    url(r'^device/device_detail/(?P<device_id>\d{6})/$', device_detail_baremetal),
+    url(r'^device/device_detail/(?P<device_id>\d{7,})/$', device_detail_virtual_server),
+    # url(r'^device/', )
 ]

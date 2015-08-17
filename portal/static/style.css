@@ -1,0 +1,42 @@
+/**********************************
+Responsive web design code
+***********************************/
+
+.wrapper {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.api_area {
+  width: 35%;
+  margin-right: 1.5%;
+  overflow-x: scroll;  
+  overflow-y: scroll;
+}
+
+.function_area {
+  width: 62.5%;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+
+/**********************************
+Code that makes it look nice
+***********************************/
+
+.api_area, .function_area {
+  background: #888;
+  /*height: 99%;*/
+  float: left;
+  border-radius: 3px;
+  color: #FFF;
+  font-family: Helvetica;
+  text-align: center;
+  display: inline-block;
+}
+
+h1 {
+  padding: 100px 0;
+  font-size: 4em;
+}
