@@ -1,0 +1,74 @@
+{% load staticfiles %}
+<html>
+<head>
+    <title>Homepage | SoftLayer API Online Demonstration</title>
+    <link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "table.css" %}">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js" ></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" ></script>
+    <script type="text/javascript" src="{% static "json.js" %}" ></script>
+</head>
+
+<div class="wrapper">
+    <div class="api_area"> <!-- Left-side Area -->
+        <h2>API 列表</h2>
+        <hr>
+
+        {{api_doc_md | safe}}
+    </div class="api_area"><!-- Left-side Area -->
+
+    <div class="function_area"> <!-- Right-side Area -->
+        <h2> 
+            <a href='{% url "home" %}'>Home</a> | 
+            <a href='{% url "device" %}'>Device</a> | 
+            <a href="">Storage</a> | 
+            <a href="">Network</a> | 
+            <a href="">Support</a> | 
+            <a href="">Account</a> |
+        </h2> 
+        <hr>
+
+
+        {% if request.get_full_path != '/' %}
+        <h3> 
+            <a href='{% url "device_list" %}'>Device_list</a> | 
+            <a href="">Auto_scale</a> | 
+        </h3> 
+        {% endif %}
+
+        <hr> 
+        <!--         -->
+        <!-- <em class="function_list_area"> {{function_list}} </em> -->
+        
+        {% if request.get_full_path != '/' %}
+        <div class = 'table_area'> <!-- Table to list the devices -->
+            <table class = 't1'>
+            <h3 style='color: white'>Devices List</h3>
+            <p>Viewing {{total_devices_number}} of {{total_devices_number}} Devices</p>
+            <thead>
+            <tr> <th>Device Name</th> <th>Device Type</th> <th>Location</th> <th>Public IP</th> <th>Private IP</th> <th>Start Date</th> </tr></thead>
+            <tbody>
+                    {% for item in baremetal %}
+                    <tr><th> <a href="/device/device_list/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a> </th> <td>Bare Metal</td> <td> {{ item.topLevelLocation.longName }} </td> <td>{{ item.primaryIpAddress }}</td> <td>{{ item.primaryBackendIpAddress }}</td> <td> {{item.provisionDate}} </td> </tr>
+                    {% endfor %}
+                    
+                    {% for item in hourlyvirtualserver %}
+                    <tr><th><a href="">{{ item.fullyQualifiedDomainName }}</a></th> <td> Virtual Server(Hourly) </td> <td> {{ item.location.id }} </td> <td>{{ item.primaryIpAddress }}</td> <td>{{ item.primaryBackendIpAddress }}</td> <td>{{item.provisionDate}}</td> </tr>
+                    {% endfor %}
+
+                    {% for item in monthlyvirtualserver %}
+                    <tr><th><a href="">{{ item.fullyQualifiedDomainName }}</a></th> <td> Virtual Server(Monthly) </td> <td> {{ item.location.id }} </td> <td>{{ item.primaryIpAddress }}</td> <td>{{ item.primaryBackendIpAddress }}</td> <td>{{ item.provisionDate }}</td> </tr>
+                    {% endfor %}
+
+            </tbody>
+            </table>
+        </div>
+        {% endif %}
+
+<!--        <hr><h3>Debug Area</h3>
+        {{debug}}
+ --> 
+    </div class="function_area"> <!-- Right-side Area -->
+</div class="wrapper">
+
+</html>

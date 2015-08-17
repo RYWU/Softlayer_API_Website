@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&garp-4c-s#2f=o^n6mn@m=1o*ust@xd7!&-gdgr2(v4$%ftk^'
+SECRET_KEY = '&garp-4c-s#2f=o^n6mn@m=1o*ust@xd7!&-gdgr2(v4$%ftk^';
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -34,9 +34,15 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
+   'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_markup',
+    'device', 
+    'storage',
+    # 'network', 
+    # 'support',
+    # 'account',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -52,10 +58,14 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'portal.urls'
 
+TEMPLATE_DIRS = (
+    os.path.join( BASE_DIR, 'templates' ).replace('\\', '/'),
+)
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -87,7 +97,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Taipei'
 
 USE_I18N = True
 
@@ -100,3 +110,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+    '/var/www/static/',
+)
+
+# SoftLayer Account Config #
+from .password import SL_USERNAME, SL_APIKEY
