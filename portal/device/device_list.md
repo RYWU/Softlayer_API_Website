@@ -1,5 +1,7 @@
-### SoftLayer_Account::getHardware: 
-#### Bare Metal 機器的資訊
+### SoftLayer_Account::getHardware
+#### 用途: 取得 Bare Metal 機器的資訊
+#### 參數: SoftLayer-Username, APIKey
+#### objectMask: 'topLevelLocation'
 
 | 使用到的 Properties | 對應到右方的欄位 |
 | ------------- |:-------------:|
@@ -10,7 +12,9 @@
 | topLevelLocation | Location |
 ***
 ### SoftLayer_Account::getHourlyVirtualGuests
-#### Virtual Server (Hourly計費) 機器的資訊
+#### 用途: 取得 Virtual Server (Hourly計費) 機器的資訊
+#### 參數: SoftLayer-Username, APIKey
+#### objectMask: 'location'
 
 | 使用到的 Properties | 對應到右方的欄位 | 備註 |
 | ------------- |:-------------:|:-------------:|
@@ -20,8 +24,10 @@
 | provisionDate | Start Date | - |
 | location | Location | location 回傳 location id，需要再將 id 轉換為地點|
 ***
-### SoftLayer_Account::getMonthlyVirtualGuests: 
-#### Virtual Server (Monthly計費) 機器的資訊
+### SoftLayer_Account::getMonthlyVirtualGuests
+#### 用途: 取得 Virtual Server (Monthly計費) 的機器資訊
+#### 參數: SoftLayer-Username, APIKey
+#### objectMask: 'location'
 
 | 使用到的 Properties | 對應到右方的欄位 | 備註 |
 | ------------- |:-------------:|:-------------:|
