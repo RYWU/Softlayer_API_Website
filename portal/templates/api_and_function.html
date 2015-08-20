@@ -13,6 +13,13 @@
 	$(window).load(function() {
 		$(".se-pre-con").fadeOut("slow");;
 	});</script>
+	<script type="text/javascript">
+			$(document).ready(function() {
+			  $('.pword').click(function() {
+			    $('#'+this.id).attr('type', 'text');
+			  });
+			});			
+	</script>
 </head>
 <body>
 <div class="se-pre-con"></div>	
@@ -57,7 +64,6 @@
 					{% for item in baremetal %}
 					<tr><th> <a href="/device/device_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a> </th> <td>Bare Metal</td> <td> {{ item.topLevelLocation.longName }} </td> <td>{{ item.primaryIpAddress }}</td> <td>{{ item.primaryBackendIpAddress }}</td> <td> {{item.provisionDate}} </td> </tr>
 					{% endfor %}
-					
 					{% for item in hourlyvirtualserver %}
 					<tr><th><a href="/device/device_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a></th> <td> Virtual Server(Hourly) </td> <td> {{ item.location.id }} </td> <td>{{ item.primaryIpAddress }}</td> <td>{{ item.primaryBackendIpAddress }}</td> <td>{{item.provisionDate}}</td> </tr>
 					{% endfor %}
@@ -84,7 +90,7 @@
 		<tbody>
 				<tr><th>Status</th> <td>{{device_info.hardwareStatus.status}}</td></tr>
 				<tr><th>Location</th> <td> {{device_info.topLevelLocation.longName}} </td></tr>
-				<tr><th>Start Date</th> <td>{{device_info.provisionDate}}</td></tr>
+				<tr><th>Start Date</th> <td> {{start_date}} </td></tr>
 				<!-- <tr><th>Reloaded</th> <td></td></tr> -->
 				<tr><th>Serial Number</th> <td>{{device_info.serialNumber}}</td></tr>
 				<tr><th>MFR Serial Number</th> <td>{{device_info.manufacturerSerialNumber}}</td></tr>
@@ -95,7 +101,7 @@
 		<thead><tr><th><h3>System</h3></th><th></th></tr></thead>
 		<tbody>
 				<tr><th>OS</th> <td>{{os.softwareLicense.softwareDescription.longDescription}}</td></tr>
-				<tr><th>RAM</th> <td>{{ram.0.hardwareComponentModel.longDescription}}</td></tr>
+				<tr><th>RAM</th> <td>{{ram.0.hardwareComponentModel.longDescription}}</td></tr> <!-- ram.'0' 的 0 代表 index = 0 的記憶體 -->
 				<tr><th>Processor</th> <td>{{processor.0.hardwareComponentModel.longDescription}}</td></tr>
 				<tr><th>Mother Board</th> <td>{{motherboard.hardwareComponentModel.longDescription}}</td></tr>
 				<tr><th>Power Supply</th> <td>{{powersupply.0.hardwareComponentModel.longDescription}}</td></tr>
@@ -106,36 +112,26 @@
 		<table class = 't1'>
 		<thead><tr><th><h3>Network</h3></th><th></th><th></th><th></th></tr></thead>
 		<thead><tr><th></th><th>Public</th><th>Private</th><th>Management</th></tr></thead>
-		<thead><tr><th></th><th>eth1</th><th>eth0</th><th>mgmt0</th></tr></thead>
+		<thead><tr><th></th><th>{{network_interface.primaryNetworkComponent.name}}{{network_interface.primaryNetworkComponent.port}}</th><th>{{network_interface.primaryBackendNetworkComponent.name}}{{network_interface.primaryBackendNetworkComponent.port}}</th><th>{{network_interface.remoteManagementComponent.name}}{{network_interface.remoteManagementComponent.port}}</th></tr></thead>
 		<tbody>
-				<tr><th>Status</th> <td>{{device_info.hardwareStatus.status}}</td><td></td><td></td></tr>
-				<tr><th>Location</th> <td></td><td></td><td></td></tr>
-				<tr><th>Start Date</th> <td>{{device_info.provisionDate}}</td><td></td><td></td></tr>
-				<tr><th>Reloaded</th> <td></td><td></td><td></td></tr>
-				<tr><th>Serial Number</th> <td>{{device_info.serialNumber}}</td><td></td><td></td></tr>
-				<tr><th>MFR Serial Number</th> <td></td><td></td><td></td></tr>
-				<tr><th>Network Bandwidth Usage</th> <td></td><td></td><td></td></tr>
+				<tr><th>Status</th> <td>{{network_interface.primaryNetworkComponent.status}}</td><td>{{network_interface.primaryBackendNetworkComponent.status}}</td><td>{{network_interface.remoteManagementComponent.status}}</td></tr>
+				<tr><th>IP Address</th> <td>{{ip_address_baremetal.primaryIpAddress}}</td><td>{{ip_address_baremetal.privateIpAddress}}</td><td>{{ip_address_baremetal.networkManagementIpAddress}}</td></tr>
+				<tr><th>Default Gateway</th> <td>{{default_dateway_baremetal.0}}</td><td>{{default_dateway_baremetal.1}}</td><td>{{default_dateway_baremetal.2}}</td></tr>
+				<tr><th>Subnet Mask</th> <td>{{subnet_mask_baremetal.0}}</td><td>{{subnet_mask_baremetal.1}}</td><td>{{subnet_mask_baremetal.2}}</td></tr>
+				<tr><th>Speed</th> <td>{{network_interface.primaryNetworkComponent.speed}} Mbps</td><td>{{network_interface.primaryBackendNetworkComponent.speed}} Mbps</td><td>{{network_interface.remoteManagementComponent.speed}} Mbps</td></tr>
+				<tr><th>Max Speed</th> <td>{{network_interface.primaryNetworkComponent.maxSpeed}} Mbps</td><td>{{network_interface.primaryBackendNetworkComponent.maxSpeed}} Mbps</td><td>{{network_interface.remoteManagementComponent.maxSpeed}} Mbps</td></tr>
+				<!-- <tr><th>VLAN</th> <td></td><td></td><td></td></tr> -->
 		</tbody>
 		</table>
-
-
+		
 		<table class = 't1'>
-		<thead><tr><th><h3>Software</h3></th><th></th></tr></thead>
+		<thead><tr><th><h3>Password</h3></th><th></th><th></th></tr></thead>
 		<tbody>
-				<tr><th>Activation Code</th> <td></td></tr>
-				<tr><th>-</th> <td></td></tr>
-				<tr><th>-</th> <td>{{device_info.provisionDate}}</td></tr>
-				<tr><th>-</th> <td></td></tr>
-				<tr><th>-</th> <td>{{device_info.serialNumber}}</td></tr>
-				<tr><th>-</th> <td></td></tr>
-		</tbody>
-		</table>
+			<thead><tr><th>Username</th><th>Password</th><th>Modified Date</th></tr></thead>
+			{% for item in baremetal_credential %}
+				<tr><th>{{item.username}}</th><td><input type="password" class="pword" id='pword{{forloop.counter}}' name="pword" value={{item.password}}/></td><td>{{item.modifyDate}}</td></tr>				
+			{% endfor %}
 
-		<table class = 't1'>
-		<thead><tr><th><h3>Password</h3></th><th></th></tr></thead>
-		<tbody>
-				<tr><th>Username</th> <td>{{baremetal_username}}</td></tr>
-				<tr><th>Password</th> <td>{{baremetal_password}}</td></tr>
 		</tbody>
 		</table>
 
@@ -144,8 +140,6 @@
 <!-- 		<hr><h3>Debug Area</h3>
 		{{debug}}
  -->
-
-
 		
 	</div class="function_area"> 
 </div class="wrapper">
