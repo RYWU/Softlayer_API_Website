@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^$', home, name='home'),
     url(r'^device/$', device, name='device'),
     url(r'^device/device_list/$', device_list, name='device_list'),
-    url(r'^device/device_detail/(?P<device_id>\d{6})/$', device_detail_baremetal),
-    url(r'^device/device_detail/(?P<device_id>\d{7,})/$', device_detail_virtual_server),
+    url(r'^device/baremetal_detail/(?P<device_id>\d)/$', device_detail_baremetal),
+    url(r'^device/virtual_server_detail/(?P<device_id>\d)/$', device_detail_virtual_server),
     # url(r'^device/', )
 ]
