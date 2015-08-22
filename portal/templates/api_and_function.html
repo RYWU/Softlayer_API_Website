@@ -147,20 +147,18 @@
 		<table class = 't1'>
 		<thead><tr><th><h3>General</h3></th><th></th></tr></thead>
 		<tbody>
-				<tr><th>Status</th> <td>{{device_info.hardwareStatus.status}}</td></tr>
+				<tr><th>Status</th> <td>{{device_info.status.keyName}}</td></tr>
 				<tr><th>Location</th> <td> {{device_info.topLevelLocation.longName}} </td></tr>
 				<tr><th>Start Date</th> <td> {{start_date}} </td></tr>
 				<!-- <tr><th>Reloaded</th> <td></td></tr> -->
-				<tr><th>Serial Number</th> <td>{{device_info.serialNumber}}</td></tr>
-				<tr><th>MFR Serial Number</th> <td>{{device_info.manufacturerSerialNumber}}</td></tr>
 		</tbody>
 		</table>
 
 		<table class = 't1'>
 		<thead><tr><th><h3>System</h3></th><th></th></tr></thead>
 		<tbody>
-				<tr><th>OS</th> <td>{{os.softwareLicense.softwareDescription.longDescription}}</td></tr>
-				<tr><th>RAM</th> <td>{{ram.0.hardwareComponentModel.longDescription}}</td></tr> <!-- ram.'0' 的 0 代表 index = 0 的記憶體 -->
+				<tr><th>OS</th> <td>{{device_info.operatingSystem.softwareLicense.softwareDescription.longDescription}}</td></tr>
+				<tr><th>RAM</th> <td>{{ram.maxMemory}}</td></tr>
 				<tr><th>Processor</th> <td>{{processor.0.hardwareComponentModel.longDescription}}</td></tr>
 				<tr><th>Mother Board</th> <td>{{motherboard.hardwareComponentModel.longDescription}}</td></tr>
 				<tr><th>Power Supply</th> <td>{{powersupply.0.hardwareComponentModel.longDescription}}</td></tr>
