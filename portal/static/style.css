@@ -25,12 +25,23 @@ Responsive web design code
 Code that makes it look nice
 ***********************************/
 
-.api_area, .function_area {
+.function_area {
   background: #888;
   /*height: 99%;*/
   float: left;
   border-radius: 3px;
   color: #FFF;
+  font-family: Helvetica;
+  text-align: center;
+  display: inline-block;
+}
+
+.api_area{
+  background: #777;
+  /*height: 99%;*/
+  float: left;
+  border-radius: 3px;
+  color: #fff;
   font-family: Helvetica;
   text-align: center;
   display: inline-block;
