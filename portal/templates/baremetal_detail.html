@@ -52,7 +52,7 @@
 <tbody>
     <thead><tr><th>Username</th><th>Password</th><th>Modified Date</th></tr></thead>
     {% for item in baremetal_credential %}
-        <tr><th>{{item.username}}</th><td><input type="password" class="pword" id='pword{{forloop.counter}}' name="pword" value={{item.password}}/></td><td>{{item.modifyDate}}</td></tr>               
+        <tr><th>{{item.username}}</th><td><input type="password" class="pword" id='pword{{forloop.counter}}' name="pword" value={{item.password}}></td><td>{{item.modifyDate}}</td></tr>               
     {% endfor %}
 
 </tbody>
