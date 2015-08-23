@@ -266,7 +266,7 @@ def get_subnet_mask_baremetal(device_id):
     
     return ret;
 
-def get_network_interface(device_id):
+def get_network_interface_baremetal(device_id):
     requestURL = 'https://'+settings.SL_USERNAME+':'+settings.SL_APIKEY+'@api.softlayer.com/rest/v3/'+ 'SoftLayer_Hardware' +'/'+ device_id + '/' + 'getObject' +'.json?objectMask=mask[primaryNetworkComponent,primaryBackendNetworkComponent,remoteManagementComponent]';
     s = requests.Session();
     response = s.get(requestURL);
@@ -296,6 +296,52 @@ def get_virtual_server_credential(device_id):
 
     return item_dict['operatingSystem']['passwords'];    
 
+def get_network_interface_virtual_server(device_id):
+    requestURL = 'https://'+settings.SL_USERNAME+':'+settings.SL_APIKEY+'@api.softlayer.com/rest/v3/'+ 'SoftLayer_Virtual_Guest' +'/'+ device_id + '/' + 'getObject' +'.json?objectMask=mask[primaryNetworkComponent,primaryBackendNetworkComponent]';
+    s = requests.Session();
+    response = s.get(requestURL);
+    item_dict = json.loads(response.text);
+    return item_dict;
+
+def get_default_gateway_virtual_server(device_id):
+    ipAddr = []
+    ipAddr.append(get_network_interface_virtual_server(device_id)['primaryNetworkComponent']['primaryIpAddress'])
+    ipAddr.append(get_network_interface_virtual_server(device_id)['primaryBackendNetworkComponent']['primaryIpAddress']) 
+
+    ret = []
+    s = requests.Session()
+    
+    requestURL = 'https://'+settings.SL_USERNAME+':'+settings.SL_APIKEY+'@api.softlayer.com/rest/v3/'+ 'SoftLayer_Network_Subnet_IpAddress' +'/' + 'getByIpAddress' +'/'+ ipAddr[0] + '.json';
+    response = s.get(requestURL)
+    item_dict = json.loads(response.text)
+    ret.append(item_dict['subnet']['gateway'])
+
+    requestURL = 'https://'+settings.SL_USERNAME+':'+settings.SL_APIKEY+'@api.softlayer.com/rest/v3/'+ 'SoftLayer_Network_Subnet_IpAddress' +'/' + 'getByIpAddress' +'/'+ ipAddr[1] + '.json';
+    response = s.get(requestURL);
+    item_dict = json.loads(response.text);
+    ret.append(item_dict['subnet']['gateway'])
+    
+    return ret;
+
+def get_subnet_mask_virtual_server(device_id):
+    ipAddr = []
+    ipAddr.append(get_network_interface_virtual_server(device_id)['primaryNetworkComponent']['primaryIpAddress'])
+    ipAddr.append(get_network_interface_virtual_server(device_id)['primaryBackendNetworkComponent']['primaryIpAddress']) 
+    
+    ret = []
+    s = requests.Session()
+    
+    requestURL = 'https://'+settings.SL_USERNAME+':'+settings.SL_APIKEY+'@api.softlayer.com/rest/v3/'+ 'SoftLayer_Network_Subnet_IpAddress' +'/' + 'getByIpAddress' +'/'+ ipAddr[0] + '.json';
+    response = s.get(requestURL)
+    item_dict = json.loads(response.text)
+    ret.append(item_dict['subnet']['netmask'])
+
+    requestURL = 'https://'+settings.SL_USERNAME+':'+settings.SL_APIKEY+'@api.softlayer.com/rest/v3/'+ 'SoftLayer_Network_Subnet_IpAddress' +'/' + 'getByIpAddress' +'/'+ ipAddr[1] + '.json';
+    response = s.get(requestURL);
+    item_dict = json.loads(response.text);
+    ret.append(item_dict['subnet']['netmask'])
+
+    return ret;    
 
 # ------------- Utility Functions Ends----------- #
 
@@ -335,7 +381,7 @@ def device_detail_baremetal(request, device_id):
                    'ip_address_baremetal': get_ip_address_baremetal(device_id),
                    'default_dateway_baremetal': get_default_gateway_baremetal(device_id),
                    'subnet_mask_baremetal': get_subnet_mask_baremetal(device_id),
-                   'network_interface': get_network_interface(device_id),
+                   'network_interface': get_network_interface_baremetal(device_id),
                    'api_doc_md': api_doc_md('device/doc/device_detail_baremetal.md'),
                   },
                 )
@@ -348,14 +394,11 @@ def device_detail_virtual_server(request, device_id):
                    'device_type': "Virtual Server",
                    'device_info': get_device_info_by_id_virtual_server(device_id),
                    'start_date': date_transform(get_device_info_by_id_virtual_server(device_id)['provisionDate']),
-                   'motherboard': '', 
-                   'powersupply': '',
-                   'drivecontroller': '',
                    'virtual_server_credential': get_virtual_server_credential(device_id),
-                   'ip_address_baremetal': '',
-                   'default_dateway_baremetal': '',
-                   'subnet_mask_baremetal': '',
-                   'network_interface': '',
+                   'ip_address_virtual_server': get_network_interface_virtual_server(device_id),
+                   'default_dateway_virtual_server': get_default_gateway_virtual_server(device_id),
+                   'subnet_mask_virtual_server': get_subnet_mask_virtual_server(device_id),
+                   'network_interface': get_network_interface_virtual_server(device_id),
                    'api_doc_md': api_doc_md('device/doc/device_detail_virtual_server.md'),
                   },
                 )
