@@ -106,13 +106,13 @@ def list_monthly_virtual_server():
         response = s.get(requestURL);
         item['pathString'] = json.loads(response.text)['pathString']
 
-    for item in item_dict:
-        temp = item['provisionDate'].partition('T')[0] 
-        temp += ' '
-        temp += item['provisionDate'].partition('T')[2][:8]
-        temp += '(UTC'
-        temp += item['provisionDate'].partition('T')[2][8:] + ')'
-        item['provisionDate'] = temp
+    # for item in item_dict:
+    #     temp = item['provisionDate'].partition('T')[0]
+    #     temp += ' '
+    #     temp += item['provisionDate'].partition('T')[2][:8]
+    #     temp += '(UTC'
+    #     temp += item['provisionDate'].partition('T')[2][8:] + ')'
+    #     item['provisionDate'] = temp
 
     return item_dict;
 
