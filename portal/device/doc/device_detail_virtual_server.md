@@ -63,3 +63,14 @@
 
 ***
 
+
+### SoftLayer\_Virtual\_Gurests::getServerRoom
+#### 用途: 取得 Virtual Server 的 地點資訊
+#### 參數: SoftLayer-Username, APIKey
+#### objectMask: 'pathString'
+
+| 使用到的 Properties | 對應到右方的欄位 |
+| ------------- |:-------------:|
+| pathString | Location | 
+
+***
