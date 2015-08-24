@@ -8,14 +8,14 @@
     </thead>
     <tbody>
             {% for item in baremetal %}
-            <tr><th> <a href="/device/baremetal_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a> </th> <td>{{ item.primaryIpAddress }}</td> <td> {{ item.topLevelLocation.longName }} </td> <td> {{item.allocation}} GB</td> <td>{{item.inboundBandwidthUsage}} GB</td> <td>{{item.outboundBandwidthUsage}} GB</td> <td> {{item.totalBandwidthUsage}}GB</td> </tr>
+            <tr><th> <a href="/device/baremetal_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a> </th> <td>{{ item.primaryIpAddress }}</td> <td> {{ item.topLevelLocation.longName }} </td> <td> {{item.allocation}} GB</td> <td>{{item.inboundBandwidthUsage}} MB</td> <td>{{item.outboundBandwidthUsage}} MB</td> <td> {{item.totalBandwidthUsage}} MB</td> </tr>
             {% endfor %}
             {% for item in hourlyvirtualserver %}
-            <tr><th><a href="/device/virtual_server_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a></th> <td>{{ item.primaryIpAddress }}</td> <td> {{ item.location.id }} </td> <td>{{item.allocation}}</td> <td>{{item.inboundBandwidthUsage}} GB</td> <td>{{item.outboundBandwidthUsage}} GB</td> <td> {{item.totalBandwidthUsage}}GB</td> </tr>
+            <tr><th><a href="/device/virtual_server_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a></th> <td>{{ item.primaryIpAddress }}</td> <td> {{ item.location.id }} </td> <td>{{item.allocation}}</td> <td>{{item.inboundBandwidthUsage}} MB</td> <td>{{item.outboundBandwidthUsage}} MB</td> <td> {{item.totalBandwidthUsage}} MB</td> </tr>
             {% endfor %}
 
             {% for item in monthlyvirtualserver %}
-            <tr><th><a href="/device/virtual_server_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a></th> <td>{{ item.primaryIpAddress }}</td> <td> {{ item.location.id }} </td> <td>{{item.allocation}} GB</td> <td>{{item.inboundBandwidthUsage}} GB</td> <td>{{item.outboundBandwidthUsage}} GB</td> <td> {{item.totalBandwidthUsage}}GB</td> </tr>
+            <tr><th><a href="/device/virtual_server_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a></th> <td>{{ item.primaryIpAddress }}</td> <td> {{ item.location.id }} </td> <td>{{item.allocation}} GB</td> <td>{{item.inboundBandwidthUsage}} MB</td> <td>{{item.outboundBandwidthUsage}} MB</td> <td> {{item.totalBandwidthUsage}} MB</td> </tr>
             {% endfor %}
 
     </tbody>
