@@ -78,13 +78,13 @@ def monthly_virtual_server_info():
                     ));
     item_dict = json.loads(ret);
 
-    for item in item_dict:
-        temp = item['provisionDate'].partition('T')[0] 
-        temp += ' '
-        temp += item['provisionDate'].partition('T')[2][:8]
-        temp += '(UTC'
-        temp += item['provisionDate'].partition('T')[2][8:] + ')'
-        item['provisionDate'] = temp
+    # for item in item_dict:
+    #     temp = item['provisionDate'].partition('T')[0] 
+    #     temp += ' '
+    #     temp += item['provisionDate'].partition('T')[2][:8]
+    #     temp += '(UTC'
+    #     temp += item['provisionDate'].partition('T')[2][8:] + ')'
+    #     item['provisionDate'] = temp
 
     for item in item_dict: # Get Allocation data #
         requestURL = 'https://'+settings.SL_USERNAME+':'+settings.SL_APIKEY+'@api.softlayer.com/rest/v3/'+ 'SoftLayer_Virtual_Guest' +'/'+ str(item['id']) + '/' + 'getBandwidthAllocation' +'.json';
