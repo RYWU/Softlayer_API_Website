@@ -13,32 +13,40 @@
 <body>
 <div class="se-pre-con"></div>	
 <div class="wrapper">
-	<div class="api_area"> <!-- Left-side Area -->
+	<!-- Left-side Area -->
+	<div class="api_area"> 
 		<h2>使用到的 API 一覽表</h2>
 		<hr>
-
+		
+		{# API DOCUMENT INCLUDE START #}
 		{{api_doc_md | safe}}
+		{# API DOCUMENT INCLUDE ENDS #}
 
 	</div class="api_area">
-
-	<div class="function_area"> <!-- Right-side Area -->
+	<!-- Right-side Area -->
+	<div class="function_area"> 
 		<h2> 
 			<a href='{% url "home" %}'>Home</a> | 
 			<a href='{% url "device" %}'>Device</a> | 
 			<a href="">Storage</a> | 
-			<a href="">Network</a> | 
+			<a href='{% url "network" %}'>Network</a> | 
 			<a href="">Support</a> | 
 			<a href="">Account</a> |
 		</h2> 
 		<hr>
 
 
-		{% if request.path == '/device/device_list' or '/device' %}
+		{% if 'device' in request.path %}
 		<h3> 
 			<a href='{% url "device_list" %}'>Device_list</a> | 
 			<a href="">Auto_scale</a> | 
 		</h3> 
+		{% elif 'network' in request.path %}
+		<h3> 
+			<a href='{% url "bandwidth_summary" %}'>Bandwidth Summary</a> | 
+		</h3> 
 		{% endif %}
+
 		<hr> 
 		
 		{% if request.path == '/device/device_list/' %}
@@ -50,9 +58,12 @@
 		{% if '/device/virtual_server_detail' in request.path %}
 		{% include "virtual_server_detail.html" %}{% endif %}
 
-<!-- 		<hr><h3>Debug Area</h3>
-		{{debug}}
- -->
+		{% if '/network/bandwidth_summary' in request.path %}
+		{% include "bandwidth_summary.html" %}{% endif %}
+
+{# 		<hr><h3>Debug Area</h3> #}
+{# 		{{debug}} #}
+
 		
 	</div class="function_area"> 
 </div class="wrapper">
