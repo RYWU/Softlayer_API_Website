@@ -52,18 +52,21 @@ def hourly_virtual_server_info():
         item['provisionDate'] = temp
 
     for item in item_dict: # Get Allocation data #
-        requestURL = 'https://'+settings.SL_USERNAME+':'+settings.SL_APIKEY+'@api.softlayer.com/rest/v3/'+ 'SoftLayer_Virtual_Guest' +'/'+ str(item['id']) + '/' + 'getBandwidthAllocation' +'.json';
-        s = requests.Session();
-        response = s.get(requestURL);
         item['allocation'] = 'Pay As You Go'
 
     for item in item_dict: # Get inbound outbound bandwidth data #
-        requestURL = 'https://'+settings.SL_USERNAME+':'+settings.SL_APIKEY+'@api.softlayer.com/rest/v3/'+ 'SoftLayer_Virtual_Guest' +'/'+ str(item['id']) + '/' + 'getObject' +'.json?objectMask=mask[inboundBandwidthUsage,outboundBandwidthUsage]';
+        requestURL = 'https://'+settings.SL_USERNAME+':'+settings.SL_APIKEY+'@api.softlayer.com/rest/v3/'+ 'SoftLayer_Virtual_Guest' +'/'+ str(item['id']) + '/' + 'getObject' +'.json?objectMask=mask[inboundPublicBandwidthUsage,outboundPublicBandwidthUsage]';
         s = requests.Session();
         response = s.get(requestURL);
-        item['inboundBandwidthUsage'] = round(1024 * float(json.loads(response.text)['inboundBandwidthUsage']), 2);
-        item['outboundBandwidthUsage'] = round(1024 * float(json.loads(response.text)['outboundBandwidthUsage']), 2);
-        item['totalBandwidthUsage'] = round( (1024 * float(json.loads(response.text)['inboundBandwidthUsage'])+1024 * float(json.loads(response.text)['outboundBandwidthUsage'])) , 2);
+        item['inboundBandwidthUsage'] = round(1024 * float(json.loads(response.text)['inboundPublicBandwidthUsage']), 2);
+        item['outboundBandwidthUsage'] = round(1024 * float(json.loads(response.text)['outboundPublicBandwidthUsage']), 2);
+        item['totalBandwidthUsage'] = round( (1024 * float(json.loads(response.text)['inboundPublicBandwidthUsage'])+1024 * float(json.loads(response.text)['outboundPublicBandwidthUsage'])) , 2);
+
+    for item in item_dict: # Get Server location #
+        requestURL = 'https://'+settings.SL_USERNAME+':'+settings.SL_APIKEY+'@api.softlayer.com/rest/v3/'+ 'SoftLayer_Virtual_Guest' +'/'+ str(item['id']) + '/' + 'getServerRoom' +'.json?objectMask=mask[pathString]';
+        s = requests.Session();
+        response = s.get(requestURL);
+        item['pathString'] = json.loads(response.text)['pathString']        
 
     return item_dict;  
 
@@ -90,12 +93,18 @@ def monthly_virtual_server_info():
         item['allocation'] = response.text[1:-1]
 
     for item in item_dict: # Get inbound outbound bandwidth data #
-        requestURL = 'https://'+settings.SL_USERNAME+':'+settings.SL_APIKEY+'@api.softlayer.com/rest/v3/'+ 'SoftLayer_Virtual_Guest' +'/'+ str(item['id']) + '/' + 'getObject' +'.json?objectMask=mask[inboundBandwidthUsage,outboundBandwidthUsage]';
+        requestURL = 'https://'+settings.SL_USERNAME+':'+settings.SL_APIKEY+'@api.softlayer.com/rest/v3/'+ 'SoftLayer_Virtual_Guest' +'/'+ str(item['id']) + '/' + 'getObject' +'.json?objectMask=mask[inboundPublicBandwidthUsage,outboundPublicBandwidthUsage]';
         s = requests.Session();
         response = s.get(requestURL);
-        item['inboundBandwidthUsage'] = round(1024 * float(json.loads(response.text)['inboundBandwidthUsage']), 2);
-        item['outboundBandwidthUsage'] = round(1024 * float(json.loads(response.text)['outboundBandwidthUsage']), 2);
-        item['totalBandwidthUsage'] = round( (1024 * float(json.loads(response.text)['inboundBandwidthUsage'])+1024 * float(json.loads(response.text)['outboundBandwidthUsage'])) , 2);
+        item['inboundBandwidthUsage'] = round(1024 * float(json.loads(response.text)['inboundPublicBandwidthUsage']), 2);
+        item['outboundBandwidthUsage'] = round(1024 * float(json.loads(response.text)['outboundPublicBandwidthUsage']), 2);
+        item['totalBandwidthUsage'] = round( (1024 * float(json.loads(response.text)['inboundPublicBandwidthUsage'])+1024 * float(json.loads(response.text)['outboundPublicBandwidthUsage'])) , 2);
+
+    for item in item_dict: # Get Server location #
+        requestURL = 'https://'+settings.SL_USERNAME+':'+settings.SL_APIKEY+'@api.softlayer.com/rest/v3/'+ 'SoftLayer_Virtual_Guest' +'/'+ str(item['id']) + '/' + 'getServerRoom' +'.json?objectMask=mask[pathString]';
+        s = requests.Session();
+        response = s.get(requestURL);
+        item['pathString'] = json.loads(response.text)['pathString']        
 
     return item_dict;
 
