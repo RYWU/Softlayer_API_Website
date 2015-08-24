@@ -20,7 +20,7 @@ from django.contrib import admin
 from portal.view import *
 from device.views import *
 # from storage.views import *
-# from network.views import *
+from network.views import *
 # from support.views import *
 # from account.views import *
 
@@ -32,4 +32,6 @@ urlpatterns = [
     url(r'^device/baremetal_detail/(?P<device_id>\d{1,})/$', device_detail_baremetal),
     url(r'^device/virtual_server_detail/(?P<device_id>\d{1,})/$', device_detail_virtual_server),
     # url(r'^device/', )
+    url(r'^network/$', network, name='network'),
+    url(r'^network/bandwidth_summary/', bandwidth_summary, name='bandwidth_summary'),
 ]
