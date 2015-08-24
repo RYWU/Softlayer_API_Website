@@ -12,3 +12,12 @@ import requests
 
 def home(request):
     return render(request, ['home.html']);
+
+def device(request):
+    return render(request, 
+                ['api_and_function.html'],
+                
+                )
+
+def network(request):
+    return render(request, ['api_and_function.html'])
