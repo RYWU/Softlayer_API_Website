@@ -10,11 +10,11 @@
             <tr><th> <a href="/device/baremetal_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a> </th> <td>Bare Metal</td> <td> {{ item.topLevelLocation.longName }} </td> <td>{{ item.primaryIpAddress }}</td> <td>{{ item.primaryBackendIpAddress }}</td> <td> {{item.provisionDate}} </td> </tr>
             {% endfor %}
             {% for item in hourlyvirtualserver %}
-            <tr><th><a href="/device/virtual_server_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a></th> <td> Virtual Server(Hourly) </td> <td> {{ item.location.id }} </td> <td>{{ item.primaryIpAddress }}</td> <td>{{ item.primaryBackendIpAddress }}</td> <td>{{item.provisionDate}}</td> </tr>
+            <tr><th><a href="/device/virtual_server_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a></th> <td> Virtual Server(Hourly) </td> <td> {{ item.pathString }} </td> <td>{{ item.primaryIpAddress }}</td> <td>{{ item.primaryBackendIpAddress }}</td> <td>{{item.provisionDate}}</td> </tr>
             {% endfor %}
 
             {% for item in monthlyvirtualserver %}
-            <tr><th><a href="/device/virtual_server_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a></th> <td> Virtual Server(Monthly) </td> <td> {{ item.location.id }} </td> <td>{{ item.primaryIpAddress }}</td> <td>{{ item.primaryBackendIpAddress }}</td> <td>{{ item.provisionDate }}</td> </tr>
+            <tr><th><a href="/device/virtual_server_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a></th> <td> Virtual Server(Monthly) </td> <td> {{ item.pathString }} </td> <td>{{ item.primaryIpAddress }}</td> <td>{{ item.primaryBackendIpAddress }}</td> <td>{{ item.provisionDate }}</td> </tr>
             {% endfor %}
 
     </tbody>
