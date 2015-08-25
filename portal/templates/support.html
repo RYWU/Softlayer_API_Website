@@ -1,0 +1,41 @@
+{% load staticfiles %}
+<html>
+<head>
+	<title>Support</title>
+	<link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "table.css" %}">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js" ></script>
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" ></script>
+	<script type="text/javascript" src="{% static "json.js" %}" ></script>
+</head>
+
+<div class="wrapper">
+	<div class="api_area"> <!-- Left-side Area -->
+		<h2>API 列表</h2>
+		<hr>
+
+		{{api_doc_md | safe}}
+
+	</div class="api_area">
+
+	<div class="function_area"> <!-- Right-side Area -->
+		<h2> 
+			<a href='{% url "home" %}'>Home</a> | 
+			<a href='{% url "device" %}'>Device</a> | 
+			<a href='{% url "network" %}'>Network</a> | 
+			<a href='{% url "support" %}'>Support</a> | 
+			<a href='{% url "account" %}'>Account</a> |
+		</h2> 
+		<hr>
+
+
+		{% if request.get_full_path != '/' %}
+		<h3> 
+			<a href='{% url "ticket" %}'>Ticket</a> | 
+		</h3> 
+		{% endif %}
+		
+	</div class="function_area"> 
+</div class="wrapper">
+
+</html>
