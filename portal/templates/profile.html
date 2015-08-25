@@ -1,0 +1,60 @@
+<!-- profile.html --> 
+<!DOCTYPE>
+{% load staticfiles %}
+<html>
+<head>
+	<title>IBMLeader</title>
+	<link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "table.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "ajax.css" %}">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js" ></script>
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" ></script>
+	<script type="text/javascript" src="{% static "json.js" %}" ></script>
+	<script type="text/javascript">//paste this code under head tag or in a seperate js file.
+	// Wait for window load
+	$(window).load(function() {
+		$(".se-pre-con").fadeOut("slow");;
+	});</script>
+</head>
+<body>
+		<div class="se-pre-con"></div>	
+		<div class="wrapper">
+			<div class="api_area"> <!-- Left-side Area -->
+				<h2>使用到的 API 一覽表</h2>
+				<hr>
+				{{api_profile_doc | safe}}
+			</div class="api_area">
+			<div class="function_area"> <!-- Right-side Area -->
+				<table border=0>
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Email Address</th>
+						<th>Time Zone</th>
+						<th>Street Address</th>
+					</tr>
+					<tr>
+						<td>{{ doc1.authenticationToken.user.firstName }}</td>
+						<td>{{ doc1.authenticationToken.user.lastName }}</td>
+						<td>{{ doc1.authenticationToken.user.email }}</td>
+						<td>{{ doc1.timezone.longName }}</td>
+						<td>{{ doc1.address1 }}</td>
+					</tr>
+					<tr>
+						<th>City</th>
+						<th>Country</th>
+						<th>Language</th>
+						<th>ZIP /Postal Code</th>
+						<th></th>
+					</tr>
+					<tr>
+						<td>{{ doc1.authenticationToken.user.city }}</td>
+						<td>{{ doc1.authenticationToken.user.country }}</td>
+						<td>{{ doc1.locale.name }}</td>
+						<td>{{ doc1.authenticationToken.user.postalCode }}</td>
+					</tr>
+				</table> 
+		</body>
+</html>
+
+
