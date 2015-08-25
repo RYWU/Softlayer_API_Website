@@ -1,0 +1,59 @@
+{# baremetal_detail.html #}
+
+<h3 style='color: white'>Device Detail</h3>
+<h3><strong style='color: black'>{{device_info.fullyQualifiedDomainName}}</strong> </h3>
+<p>Device Type: {{device_type}}</p>
+<p>Device Public IP: {{device_info.primaryIpAddress}} </p>
+<p>Device Private IP: {{device_info.primaryBackendIpAddress}} </p>
+
+<table class = 't1'>
+<thead><tr><th><h3>General</h3></th><th></th></tr></thead>
+<tbody>
+        <tr><th>Status</th> <td>{{device_info.hardwareStatus.status}}</td></tr>
+        <tr><th>Location</th> <td> {{device_info.topLevelLocation.longName}} </td></tr>
+        <tr><th>Start Date</th> <td> {{start_date}} </td></tr>
+        <!-- <tr><th>Reloaded</th> <td></td></tr> -->
+        <tr><th>Serial Number</th> <td>{{device_info.serialNumber}}</td></tr>
+        <tr><th>MFR Serial Number</th> <td>{{device_info.manufacturerSerialNumber}}</td></tr>
+</tbody>
+</table>
+
+<table class = 't1'>
+<thead><tr><th><h3>System</h3></th><th></th></tr></thead>
+<tbody>
+        <tr><th>OS</th> <td>{{os.softwareLicense.softwareDescription.longDescription}}</td></tr>
+        <tr><th>RAM</th> <td>{{ram.0.hardwareComponentModel.longDescription}}</td></tr> <!-- ram.'0' 的 0 代表 index = 0 的記憶體 -->
+        {% for item in processor %}
+            <tr><th>Processor</th> <td>{{item.hardwareComponentModel.longDescription}}</td></tr>
+        {% endfor %}
+        <tr><th>Mother Board</th> <td>{{motherboard.hardwareComponentModel.longDescription}}</td></tr>
+        <tr><th>Power Supply</th> <td>{{powersupply.0.hardwareComponentModel.longDescription}}</td></tr>
+        <tr><th>Drive Control</th> <td>{{drivecontroller.0.hardwareComponentModel.longDescription}}</td></tr>
+</tbody>
+</table>
+
+<table class = 't1'>
+<thead><tr><th><h3>Network</h3></th><th></th><th></th><th></th></tr></thead>
+<thead><tr><th></th><th>Public</th><th>Private</th><th>Management</th></tr></thead>
+<thead><tr><th></th><th>{{network_interface.primaryNetworkComponent.name}}{{network_interface.primaryNetworkComponent.port}}</th><th>{{network_interface.primaryBackendNetworkComponent.name}}{{network_interface.primaryBackendNetworkComponent.port}}</th><th>{{network_interface.remoteManagementComponent.name}}{{network_interface.remoteManagementComponent.port}}</th></tr></thead>
+<tbody>
+        <tr><th>Status</th> <td>{{network_interface.primaryNetworkComponent.status}}</td><td>{{network_interface.primaryBackendNetworkComponent.status}}</td><td>{{network_interface.remoteManagementComponent.status}}</td></tr>
+        <tr><th>IP Address</th> <td>{{ip_address_baremetal.primaryIpAddress}}</td><td>{{ip_address_baremetal.privateIpAddress}}</td><td>{{ip_address_baremetal.networkManagementIpAddress}}</td></tr>
+        <tr><th>Default Gateway</th> <td>{{default_dateway_baremetal.0}}</td><td>{{default_dateway_baremetal.1}}</td><td>{{default_dateway_baremetal.2}}</td></tr>
+        <tr><th>Subnet Mask</th> <td>{{subnet_mask_baremetal.0}}</td><td>{{subnet_mask_baremetal.1}}</td><td>{{subnet_mask_baremetal.2}}</td></tr>
+        <tr><th>Speed</th> <td>{{network_interface.primaryNetworkComponent.speed}} Mbps</td><td>{{network_interface.primaryBackendNetworkComponent.speed}} Mbps</td><td>{{network_interface.remoteManagementComponent.speed}} Mbps</td></tr>
+        <tr><th>Max Speed</th> <td>{{network_interface.primaryNetworkComponent.maxSpeed}} Mbps</td><td>{{network_interface.primaryBackendNetworkComponent.maxSpeed}} Mbps</td><td>{{network_interface.remoteManagementComponent.maxSpeed}} Mbps</td></tr>
+        <!-- <tr><th>VLAN</th> <td></td><td></td><td></td></tr> -->
+</tbody>
+</table>
+
+<table class = 't1'>
+<thead><tr><th><h3>Password</h3></th><th></th><th></th></tr></thead>
+<tbody>
+    <thead><tr><th>Username</th><th>Password</th><th>Modified Date</th></tr></thead>
+    {% for item in baremetal_credential %}
+        <tr><th>{{item.username}}</th><td><input type="password" class="pword" id='pword{{forloop.counter}}' name="pword" value={{item.password}}></td><td>{{item.modifyDate}}</td></tr>               
+    {% endfor %}
+
+</tbody>
+</table>

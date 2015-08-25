@@ -1,0 +1,23 @@
+{# bandwidth_summary.html #}
+<div class = 'table_area'> <!-- Table to list the devices -->
+    <table class = 't1'>
+    <h3 style='color: white'>Bandwidth Summary</h3>
+    <p>Viewing {{total_devices_number}} of {{total_devices_number}} Devices</p>
+    <thead>
+        <tr> <th>Device Name</th> <th>Public IP</th> <th>Location</th> <th>Allocation</th> <th>In</th> <th>Out</th> <th>Total</th> </tr>
+    </thead>
+    <tbody>
+            {% for item in baremetal %}
+            <tr><th> <a href="/device/baremetal_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a> </th> <td>{{ item.primaryIpAddress }}</td> <td> {{ item.topLevelLocation.longName }} </td> <td> {{item.allocation}} GB</td> <td>{{item.inboundBandwidthUsage}} MB</td> <td>{{item.outboundBandwidthUsage}} MB</td> <td> {{item.totalBandwidthUsage}} MB</td> </tr>
+            {% endfor %}
+            {% for item in hourlyvirtualserver %}
+            <tr><th><a href="/device/virtual_server_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a></th> <td>{{ item.primaryIpAddress }}</td> <td> {{ item.pathString }} </td> <td>{{item.allocation}}</td> <td>{{item.inboundBandwidthUsage}} MB</td> <td>{{item.outboundBandwidthUsage}} MB</td> <td> {{item.totalBandwidthUsage}} MB</td> </tr>
+            {% endfor %}
+
+            {% for item in monthlyvirtualserver %}
+            <tr><th><a href="/device/virtual_server_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a></th> <td>{{ item.primaryIpAddress }}</td> <td> {{ item.pathString }} </td> <td>{{item.allocation}} GB</td> <td>{{item.inboundBandwidthUsage}} MB</td> <td>{{item.outboundBandwidthUsage}} MB</td> <td> {{item.totalBandwidthUsage}} MB</td> </tr>
+            {% endfor %}
+
+    </tbody>
+    </table>
+</div>

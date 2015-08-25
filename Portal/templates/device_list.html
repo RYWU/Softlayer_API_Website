@@ -1,0 +1,22 @@
+{# device_list.html #}
+<div class = 'table_area'> <!-- Table to list the devices -->
+    <table class = 't1'>
+    <h3 style='color: white'>Devices List</h3>
+    <p>Viewing {{total_devices_number}} of {{total_devices_number}} Devices</p>
+    <thead>
+    <tr> <th>Device Name</th> <th>Device Type</th> <th>Location</th> <th>Public IP</th> <th>Private IP</th> <th>Start Date</th> </tr></thead>
+    <tbody>
+            {% for item in baremetal %}
+            <tr><th> <a href="/device/baremetal_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a> </th> <td>Bare Metal</td> <td> {{ item.topLevelLocation.longName }} </td> <td>{{ item.primaryIpAddress }}</td> <td>{{ item.primaryBackendIpAddress }}</td> <td> {{item.provisionDate}} </td> </tr>
+            {% endfor %}
+            {% for item in hourlyvirtualserver %}
+            <tr><th><a href="/device/virtual_server_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a></th> <td> Virtual Server(Hourly) </td> <td> {{ item.pathString }} </td> <td>{{ item.primaryIpAddress }}</td> <td>{{ item.primaryBackendIpAddress }}</td> <td>{{item.provisionDate}}</td> </tr>
+            {% endfor %}
+
+            {% for item in monthlyvirtualserver %}
+            <tr><th><a href="/device/virtual_server_detail/{{item.id}}">{{ item.fullyQualifiedDomainName }}</a></th> <td> Virtual Server(Monthly) </td> <td> {{ item.pathString }} </td> <td>{{ item.primaryIpAddress }}</td> <td>{{ item.primaryBackendIpAddress }}</td> <td>{{ item.provisionDate }}</td> </tr>
+            {% endfor %}
+
+    </tbody>
+    </table>
+</div>
