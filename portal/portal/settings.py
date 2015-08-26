@@ -1,5 +1,5 @@
 """
-Django settings for Portal project.
+Django settings for portal project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -75,9 +75,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'Portal.urls'
+ROOT_URLCONF = 'portal.urls'
 
-WSGI_APPLICATION = 'Portal.wsgi.application'
+WSGI_APPLICATION = 'portal.wsgi.application'
 
 
 # Database
