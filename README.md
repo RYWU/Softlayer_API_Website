@@ -1,8 +1,22 @@
-# SoftLayer REST API Demonstration Website
+# SoftLayer Portal   
 
-## Core contributor: 
+SoftLayer Portal is a website project to showcase some elementary functions a developer need to build in a SoftLayer portal.
 
-* William WU(吳瑞洋) @wuruiyang
-* Aleena LU
+With SoftLayer Portal, you can do things like showing all device name and check its bandwidth. 
 
+ordering a baremetal server and running some applications with it.
+
+A portal is a control panel that helps you manage these SoftLayer instances.
  
+## Installation
+TBA
+
+## Demonstration
+Please visit [ibm.rywu.tw](http://ibm.rywu.tw:8000) for some feature demonstration.
+
+## Contributor
+* William WU (吳瑞洋) @wuruiyang
+* Aleena LU 
+
+## Questions
+For any questions or information, feel free to email William at <william.rywu@gmail.com> 
