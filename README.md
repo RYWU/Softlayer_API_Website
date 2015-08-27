@@ -1,12 +1,8 @@
 # SoftLayer Portal   
 
-SoftLayer Portal is a website project to showcase some elementary functions a developer need to build in a SoftLayer portal.
+SoftLayer Portal is a website project to showcase some elementary functions needed in a typical cloud management portal.
 
-With SoftLayer Portal, you can do things like showing all device name and check its bandwidth. 
-
-ordering a baremetal server and running some applications with it.
-
-A portal is a control panel that helps you manage these SoftLayer instances.
+With SoftLayer Portal, you can do things like showing all device name and check its bandwidth, ordering a baremetal server and running some applications with it, this portal project is a good example for developers who are interested in building SoftLayer portal to manage owned SoftLayer instances.
  
 ## Installation
 ```shell
