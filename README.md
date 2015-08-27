@@ -1,6 +1,6 @@
 # SoftLayer Portal   
 
-SoftLayer Portal is a website project to showcase some elementary functions needed in a typical cloud management portal.
+SoftLayer Portal is a website project to showcase some elementary functions in a SoftLayer portal implemented with REST API.
 
 With SoftLayer Portal, you can do things like showing all device name and check its bandwidth, ordering a baremetal server and running some applications with it, this portal project is a good example for developers who are interested in building SoftLayer portal to manage owned SoftLayer instances.
  
@@ -9,7 +9,7 @@ With SoftLayer Portal, you can do things like showing all device name and check 
 $ pip3 install django
 $ git clone https://github.com/RYWU/SoftLayer-Portal.git
 $ cd SoftLayer-Portal/portal
-$ python3 manage.py runserver
+$ python3 manage.py runserver 127.0.0.1:8000
 ```
 
 ## Demonstration
