@@ -2,7 +2,7 @@
 
 SoftLayer Portal is a website project to showcase some elementary functions in a SoftLayer portal implemented with REST API.
 
-With SoftLayer Portal, you can do things like showing all device name and check its bandwidth, ordering a baremetal server and running some applications with it, this portal project is a good example for developers who are interested in building SoftLayer portal to manage owned SoftLayer instances.
+With SoftLayer Portal, you can do some management, such as showing all device names and checking its bandwidth, listing all billing items and group by initials. This portal project is a good example for developers interested in building SoftLayer portal to manage owned SoftLayer instances.
  
 ## Installation
 ```shell
