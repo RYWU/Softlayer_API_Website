@@ -1,8 +1,8 @@
-# SoftLayer Portal   
+# SoftLayer API Website
 
-SoftLayer Portal is a website project to showcase some elementary functions in a SoftLayer portal implemented with REST API.
+SoftLayer API Website is a website project to showcase some elementary functions in a SoftLayer portal implemented with REST API.
 
-With SoftLayer Portal, you can do some management, such as showing all device names and checking its bandwidth, listing all billing items and group by initials. This portal project is a good example for developers interested in building SoftLayer portal to manage owned SoftLayer instances.
+With SoftLayer API Website, you can do some management, such as showing all device names and checking its bandwidth, listing all billing items and group by initials. This portal project is a good example for developers interested in building SoftLayer portal to manage owned SoftLayer instances.
  
 ## Installation
 ```shell
