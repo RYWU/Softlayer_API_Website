@@ -15,7 +15,7 @@
  9. Referenced API Components
  10. External Links
 
-### REST URLs 
+### 1. REST URLs 
 一個基本的REST request 如下：
 ```sh
 https://[username]:[apiKey]@api.[service.]softlayer.com/rest/v3/[serviceName]/[initializationParameter].[returnDatatype]
@@ -60,7 +60,7 @@ https://username:apiKey@api.softlayer.com/rest/v3/SoftLayer_Hardware_Server/1234
 ```
 如果想要抓取特定資料，可以利用物件遮罩(objectMask)，這部分在下面章節會說明。
 
-### HTTP Request Types
+### 2. HTTP Request Types
 ##### DELETE
 使用 HTTP DELETE request可以替代service中deleteObject() 的方法。
 舉例而言，傳送一個HTTP DELETE request URL如下所示，可以將domain record 1234從SoftLayer's DNS servers中移除。
@@ -253,7 +253,7 @@ https://USERNAME:APIKEY@api.softlayer.com/rest/v3/SoftLayer_Account/getHardware.
 }
 ```
 
-### Using Result Limits
+### 6. Using Result Limits
 
 在這部分會說明有時候SoftLayer API會回傳太多資料，可以依照需求在URL後面加上resultLimit來限制回傳的資料量，設定resultLimit需利用逗號將兩個數字分開，兩個數字分別設定:
 * 要傳回資料的起始位置
