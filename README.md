@@ -3,7 +3,7 @@
 SoftLayer API Website is a website project to showcase some elementary functions in a SoftLayer portal implemented with REST API.
 
 With SoftLayer API Website, you can do some management, such as showing all device names and checking its bandwidth, listing all billing items and group by initials. This portal project is a good example for developers interested in building SoftLayer portal to manage owned SoftLayer instances.
- 
+
 ## Installation
 ```shell
 $ pip3 install django
@@ -20,4 +20,4 @@ Please visit [ibm.rywu.tw](http://ibm.rywu.tw:8000) for some feature demonstrati
 * Aleena LU 
 
 ## Questions
-For any questions or information, feel free to email William at <william.rywu@gmail.com> 
+For any questions or information, feel free to email William at <william.rywu@gmail.com>
