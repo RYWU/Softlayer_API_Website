@@ -7,7 +7,7 @@ from datetime import datetime
 from django.conf import settings
 
 # ------------- Utility Functions Starts ----------- #
-from Portal.utils import *
+from portal.utils import *
 # ------------- Utility Functions Ends----------- #
 
 # ------------- URL-Handler Functions Starts----------- #
