@@ -1,6 +1,6 @@
 # SoftLayer API Website
 
-SoftLayer API Website is a website project to showcase some elementary functions in a SoftLayer portal implemented with REST API.
+SoftLayer API Website is a website project to showcase some elementary functions of SoftLayer portal. These functions are implemented with SoftLayer REST API.
 
 This project is implemented in Python programming language, and Django framework. 
 
