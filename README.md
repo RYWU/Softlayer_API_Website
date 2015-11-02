@@ -9,7 +9,7 @@ With SoftLayer API Website, you can do some management, such as showing all devi
 ## Installation
 ```shell
 $ pip3 install django
-$ git clone https://github.com/RYWU/SoftLayer-Portal.git
+$ git clone https://github.com/RYWU/Softlayer_API_Website.git
 $ cd SoftLayer-Portal/portal
 $ python3 manage.py runserver 127.0.0.1:8000
 ```
