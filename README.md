@@ -15,7 +15,7 @@ $ python3 manage.py runserver 127.0.0.1:8000
 ```
 
 ## Demonstration
-Please visit [ibm.rywu.tw](http://ibm.rywu.tw:8000) for some feature demonstration.
+Please visit [ibm.williamswu.com](http://ibm.williamswu.com:8000) for some feature demonstration.
 
 ## Contributor
 * William WU (吳瑞洋) @wuruiyang
