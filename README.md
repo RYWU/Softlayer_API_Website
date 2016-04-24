@@ -1,5 +1,5 @@
 # SoftLayer API Website
-![](https://www.williamswu.com/d/softlayer_api_website_layout.png)
+![](http://i.imgur.com/WTpReI1.png)
 SoftLayer API Website is a website project to showcase some elementary functions of SoftLayer portal. These functions are implemented with SoftLayer REST API.
 
 This project is implemented in Python programming language, and Django framework. 
