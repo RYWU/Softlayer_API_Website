@@ -13,6 +13,8 @@ $ git clone https://github.com/RYWU/Softlayer_API_Website.git
 $ cd SoftLayer-Portal/portal
 $ python3 manage.py runserver 127.0.0.1:8000
 ```
+## Documentation
+For more information about how to use Softlayer RESTful API, please visit [SoftLayer API Website documentation](https://www.gitbook.com/book/rywu/softlayer-rest-api/details)
 
 ## Demonstration
 Please visit [ibm.williamswu.com](http://ibm.williamswu.com:8000) for some feature demonstration.
