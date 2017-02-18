@@ -23,5 +23,8 @@ Please visit [ibm.williamswu.com](http://ibm.williamswu.com:8000) for some featu
 * William WU (吳瑞洋) @wuruiyang
 * Aleena LU 
 
+### License
+SoftLayer API website is [BSD licensed](https://github.com/RYWU/Softlayer_API_Website/blob/master/LICENSE.txt).
+
 ## Questions
 For any questions or information, feel free to email William at <william.rywu@gmail.com>
